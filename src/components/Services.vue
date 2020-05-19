@@ -10,6 +10,7 @@
       :loading="loadingList"
       class="elevation-1"
       item-key="id"
+      sort-desc
     >
       <template v-slot:top>
         <v-toolbar flat color="white">
@@ -125,9 +126,6 @@ export default {
       this.newService = true
       this.showModal = true
       this.selectedService = {}
-    },
-    getFiltered (list) {
-      console.log(list.length)
     }
   }
 };

@@ -14,7 +14,7 @@
           width="40"
         />
 
-        <span class="shrink mt-1 hidden-sm-and-down">Nalasha Assignment</span>
+        <span class="shrink mt-1 hidden-sm-and-down">Nalashaa Assignment</span>
       </div>
 
     </v-app-bar>

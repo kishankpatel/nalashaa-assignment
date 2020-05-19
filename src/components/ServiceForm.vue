@@ -72,7 +72,6 @@
           </v-radio-group>
           <AddModifier
             v-model="service.modifiers"
-            :modifiers="service.modifiers"
             :key="'addModifier' + service.id"
           />
           <br>
@@ -147,6 +146,7 @@ export default {
       this.$emit('onClose');
     },
     closeModal () {
+      // Reset all errrors and close modals
       this.$v.$reset();
       this.$emit('onClose');
     }

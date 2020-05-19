@@ -1,25 +1,28 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import defaultData from '../Data'
+import defaultData from '../Data';
+const modifierList = [
+  'AA - AA',
+  'AB - AB',
+  'AC - AC',
+  'AD - AD',
+  'AE - AE'
+]
+
+const positions = {
+  1: '#4CAF50',
+  2: '#00BCD4',
+  3: '#FF9800',
+  4: '#9C27B0'
+}
 
 Vue.use(Vuex);
 
 export const state = () => (
   {
     services: [],
-    modifierList: [
-      'AA - AA',
-      'AB - AB',
-      'AC - AC',
-      'AD - AD',
-      'AE - AE'
-    ],
-    positions: {
-      1: '#4CAF50',
-      2: '#00BCD4',
-      3: '#FF9800',
-      4: '#9C27B0'
-    }
+    modifierList,
+    positions
   }
 );
 
@@ -28,7 +31,7 @@ export const mutations = {
     state.services = services
   },
   addService(state, service) {
-    state.services.push(service);
+    state.services.unshift(service);
   }
 };
 

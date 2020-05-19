@@ -6,7 +6,7 @@
     <div class="d-flex px-3 py-3">
       <h3>Modifiers</h3>
       <v-spacer></v-spacer>
-      <v-dialog v-model="showModifierDialog" persistent max-width="400px">
+      <v-dialog v-model="showModifierDialog" persistent max-width="450px">
         <template v-slot:activator="{ on }">
           <v-btn class="mx-2" fab outlined small color="primary" v-on="on" @click="showModifierDialog = true">
             <v-icon dark>mdi-plus</v-icon>
@@ -15,12 +15,18 @@
         <v-card>
           <v-card-title class="headline">Add Modifier</v-card-title>
           <v-card-text>
+            <v-alert type="error" v-if="showError">
+              Code and Position are required to add modifier.
+            </v-alert>
             <v-select
               :items="modifierList"
-              label="Standard"
+              label="Code"
               dense
               v-model="modifier"
             ></v-select>
+            <div>
+              Position of Modifier
+            </div>
             <template v-for="(value, key) in positions">
               <v-btn
                 class="ma-2"
@@ -67,26 +73,28 @@
 <script>
 import { mapState } from 'vuex';
 export default {
-  props: ['modifiers'],
+  props: ['value'],
   data () {
-
     return {
       selectedModifiers: [],
       showModifierDialog: false,
       position: '',
-      modifier: ''
+      modifier: '',
+      showError: false
     }
   },
   computed: {
     ...mapState(['modifierList', 'positions'])
   },
   mounted () {
-    this.selectedModifiers = Object.assign([], this.modifiers)
+    // Prefill modifiers while editing service
+    this.selectedModifiers = Object.assign([], this.value)
   },
   methods: {
     addModifier () {
       if (!this.position || this.modifier) {
         this.showError = true;
+        return;
       }
       this.selectedModifiers.push({ position: this.position, value: this.modifier });
       this.$emit('input', this.selectedModifiers);
@@ -97,6 +105,7 @@ export default {
       this.$emit('input', this.selectedModifiers);
     },
     closeDialog () {
+      // Reset values and hide modal
       this.position = '';
       this.modifier = '';
       this.showError = false;
