@@ -1,4 +1,4 @@
-# nalasha-assignment
+# Nalashaa Assignment
 
 ## Project setup
 ```
